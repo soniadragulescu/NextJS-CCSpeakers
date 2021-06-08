@@ -1,7 +1,7 @@
 import useEmailValidation from './useEmailValidation';
 
 function EmailValidatingForm() {
-    const {setEmail, cuont, email, emailValid, setCount} = useEmailValidation(10);
+    const {setEmail, count, email, emailValid, setCount} = useEmailValidation(10);
   
     return (
     <div className="container">

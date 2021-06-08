@@ -5,7 +5,8 @@ import fs from 'fs'
 
 export const InitialSpeakersDataContext = React.createContext();
 
-export async function getServerSideProps() {
+//export async function getServerSideProps() {
+export async function getStaticProps() {
   const { promisify } = require('util');
   const readFile = promisify(fs.readFile);
   const jsonFile = path.resolve('./', 'db.json');
@@ -20,7 +21,8 @@ export async function getServerSideProps() {
   }
 
   return {
-    props: {initialSpeakerData}
+    props: {initialSpeakerData},
+    revalidate: 1
   }
 
 }

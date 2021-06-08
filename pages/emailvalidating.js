@@ -1,8 +1,13 @@
-import React from 'react'
-import EmailValidatingForm from '../src/EmailValidatingForm'
+import EmailValidatingForm from '../src/EmailValidatingForm';
 
-function emailvalidating(){
-    return <EmailValidatingForm/>
+export async function getServerSideProps() {
+    return {
+        props: {}
+    }
 }
 
-export default emailvalidating
+function emailvalidating() {
+  return <EmailValidatingForm />;
+}
+
+export default emailvalidating;
