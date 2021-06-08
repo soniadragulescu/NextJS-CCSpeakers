@@ -1,7 +1,9 @@
 import React from 'react'
 import App from '../src/App'
 import path from 'path'
-import fs from 'fs';
+import fs from 'fs'
+
+export const InitialSpeakersDataContext = React.createContext();
 
 export async function getServerSideProps() {
   const { promisify } = require('util');
@@ -24,7 +26,9 @@ export async function getServerSideProps() {
 }
 
 function speakers({initialSpeakerData}) {
-  return <App pageName='Speakers' />
+  return <InitialSpeakersDataContext.Provider value = {initialSpeakerData}>
+    <App pageName='Speakers' />
+    </InitialSpeakersDataContext.Provider>
 }
 
 export default speakers
