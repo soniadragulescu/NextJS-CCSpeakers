@@ -4,7 +4,7 @@ import { Header } from './Header';
 import { Menu } from './Menu';
 import SpeakerDetail from './SpeakerDetail';
 import { ConfigContext } from './App';
-import useSpeakerDataManager from './useSpeakerDataManager';
+import {GlobalContext} from './GlobalState'
 
 const Speakers = ({}) => {
   const [speakingSaturday, setSpeakingSaturday] = useState(true);
@@ -15,12 +15,23 @@ const Speakers = ({}) => {
     isLoading,
     speakerList,
     toggleSpeakerFavorite,
-  } = useSpeakerDataManager();
+    hasError,
+    error,
+    forceImageRerender
+  } = useContext(GlobalContext);
+
+  // const {
+  //   isLoading,
+  //   speakerList,
+  //   toggleSpeakerFavorite,
+  // } = useSpeakerDataManager();
 
   const handleChangeSaturday = () => {
+    forceImageRerender();
     setSpeakingSaturday(!speakingSaturday);
   };
   const handleChangeSunday = () => {
+    forceImageRerender();
     setSpeakingSunday(!speakingSunday);
   };
   const heartFavoriteHandler = useCallback((e, speakerRec) => {
@@ -48,6 +59,12 @@ const Speakers = ({}) => {
   );
 
   const speakerListFiltered = isLoading ? [] : newSpeakerList;
+
+  if(hasError === true){
+    return <div>
+      Error: {error.message}
+    </div>
+  }
 
   if (isLoading) return <div>Loading...</div>;
 
